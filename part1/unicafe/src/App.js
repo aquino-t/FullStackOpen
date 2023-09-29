@@ -22,10 +22,22 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  
 
   const aumentarGood = () => setGood(good + 1)
   const aumentarNeutral = () => setNeutral(neutral + 1)
   const aumentarBad = () => setBad(bad + 1)
+  const mostrarTodos = () => good + neutral + bad
+  const mediaVotos = () => {
+    if (mostrarTodos() != 0) {
+      return (good - bad) / mostrarTodos()
+    }
+  }
+  const porcentagemPos = () => {
+    if (mostrarTodos() != 0) {
+      return (100*good)/mostrarTodos()
+    }
+  }
 
   return (
     <div>
@@ -58,8 +70,24 @@ const App = () => {
       contador={bad}
       texto={"bad: "}
       />
+      <Exibir 
+      contador={mostrarTodos()}
+      texto={"all: "}
+      />
+      
+      <Exibir 
+      contador={mediaVotos()}
+      texto={"average: "}
+      />
+        <Exibir 
+      contador={porcentagemPos() + " %"}
+      texto={"positive: "}
+      />
+
     </div>
   )
+  
 }
+
 
 export default App
